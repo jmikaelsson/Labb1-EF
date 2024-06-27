@@ -1,0 +1,129 @@
+﻿@model Labb1_EF.Models.LeaveApplication
+
+@{
+    ViewData["Title"] = "Redigera ledighetsansökan";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<div class="container">
+    <h2>@ViewData["Title"]</h2>
+    <div class="row">
+        <div class="col-md-6">
+            <div class="login-form mt-lg-5">
+                @if (User.IsInRole("Employee"))
+                {
+                    <h4>Redigera ansökningsuppgifter</h4>
+                    <hr />
+                    <form asp-action="Edit" method="post" id="editForm">
+                        <input type="hidden" asp-for="ApplicationId" />
+                        <input type="hidden" asp-for="FkEmployeeId" />
+
+                        <div asp-validation-summary="ModelOnly" class="text-danger" role="alert"></div>
+
+                        <div class="form-floating mt-3">
+                            <input asp-for="StartDate" class="form-control" placeholder="Ange startdatum för ledighet" />
+                            <label asp-for="StartDate">Startdatum</label>
+                            <span asp-validation-for="StartDate" class="text-danger"></span>
+                        </div>
+
+                        <div class="form-floating mt-3">
+                            <input asp-for="EndDate" class="form-control" placeholder="Ange slutdatum för ledighet" />
+                            <label asp-for="EndDate">Slutdatum</label>
+                            <span asp-validation-for="EndDate" class="text-danger"></span>
+                        </div>
+
+                        <div class="form-floating mt-3">
+                            <select asp-for="LeaveType" class="form-control" placeholder="Välj typ av ledighet">
+                                <option value="">Välj ledighetstyp...</option>
+                                @foreach (var leaveType in Enum.GetValues(typeof(Labb1_EF.Models.LeaveType)))
+                                {
+                                    <option value="@leaveType">@leaveType</option>
+                                }
+                            </select>
+                            <label asp-for="LeaveType">Ledighetstyp</label>
+                            <span asp-validation-for="LeaveType" class="text-danger"></span>
+                        </div>
+
+                        <div class="form-floating mt-3">
+                            <input asp-for="ApplicationStatus" class="form-control" placeholder="Ange ansökningsstatus" readonly />
+                            <label asp-for="ApplicationStatus">Ansökningsstatus</label>
+                            <span asp-validation-for="ApplicationStatus" class="text-danger"></span>
+                        </div>
+
+                        <button type="submit" class="btn-leave mt-5">Spara</button>
+                    </form>
+                }
+                @if (User.IsInRole("Chef"))
+                {
+                    <h4>Hantera ansökan</h4>
+                    <hr />
+                    <form asp-action="Edit" method="post" id="editForm">
+                        <input type="hidden" asp-for="ApplicationId" />
+                        <input type="hidden" asp-for="FkEmployeeId" />
+
+                        <div asp-validation-summary="ModelOnly" class="text-danger" role="alert"></div>
+
+                        <div class="form-floating mt-3">
+                            <input asp-for="StartDate" class="form-control" placeholder="Ange startdatum för ledighet" readonly />
+                            <label asp-for="StartDate">Startdatum</label>
+                            <span asp-validation-for="StartDate" class="text-danger"></span>
+                        </div>
+
+                        <div class="form-floating mt-3">
+                            <input asp-for="EndDate" class="form-control" placeholder="Ange slutdatum för ledighet" readonly />
+                            <label asp-for="EndDate">Slutdatum</label>
+                            <span asp-validation-for="EndDate" class="text-danger"></span>
+                        </div>
+
+                        <div class="form-floating mt-3">
+                            <select asp-for="LeaveType" class="form-control" placeholder="Välj typ av ledighet" readonly>
+                                <option value="">Välj ledighetstyp...</option>
+                                @foreach (var leaveType in Enum.GetValues(typeof(Labb1_EF.Models.LeaveType)))
+                                {
+                                    <option value="@leaveType">@leaveType</option>
+                                }
+                            </select>
+                            <label asp-for="LeaveType">Ledighetstyp</label>
+                            <span asp-validation-for="LeaveType" class="text-danger"></span>
+                        </div>
+
+                        <div class="form-floating mt-3">
+                            <select asp-for="ApplicationStatus" class="form-control" placeholder="Välj ansökningsstatus">
+                                <option value="">Välj status...</option>
+                                @foreach (var applicationStatus in Enum.GetValues(typeof(Labb1_EF.Models.ApplicationStatus)))
+                                {
+                                    <option value="@applicationStatus">@applicationStatus</option>
+                                }
+                            </select>
+                            <label asp-for="ApplicationStatus">Ansökningsstatus</label>
+                            <span asp-validation-for="ApplicationStatus" class="text-danger"></span>
+                        </div>
+
+                        <button type="submit" class="btn-leave mt-5">Spara</button>
+                    </form>
+                }
+            </div>
+            <div class="mt-md-5">
+                <a class="text-decoration-none text-black-50" asp-action="Index">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-arrow-left-short" viewBox="0 0 16 16">
+                        <path fill-rule="evenodd" d="M12 8a.5.5 0 0 1-.5.5H5.707l2.147 2.146a.5.5 0 0 1-.708.708l-3-3a.5.5 0 0 1 0-.708l3-3a.5.5 0 1 1 .708.708L5.707 7.5H11.5a.5.5 0 0 1 .5.5" />
+                    </svg> Tillbaka ansökningar
+                </a>
+            </div>
+        </div>
+        <div class="col-md-6">
+            @if (User.IsInRole("Employee"))
+            {
+                <img src="/img/edit.jpg" class="img-fluid" alt="Editing" />
+            }
+            @if (User.IsInRole("Chef"))
+            {
+                <img src="/img/edit-manager.jpg" class="img-fluid" alt="Editing" />
+            }
+        </div>
+    </div>
+</div>
+
+@section Scripts {
+    <partial name="_ValidationScriptsPartial" />
+}

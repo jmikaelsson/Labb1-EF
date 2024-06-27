@@ -1,0 +1,35 @@
+﻿@page
+@model IndexModel
+@{
+    ViewData["Title"] = "Profil";
+    ViewData["ActivePage"] = ManageNavPages.Index;
+}
+
+<div class="container mt-5">
+    <div class="row justify-content-between align-items-start">
+        <div class="col-md-6 mt-lg-5">
+            <div class="login-form">
+                <h4>Användarinformation</h4>
+                <hr />
+                <form id="profile-form" method="post">
+                    <partial name="_StatusMessage" for="StatusMessage" />
+
+                    <div class="mb-3">
+                        <label for="username" class="form-label">Användarnamn</label>
+                        <input id="username" asp-for="Username" class="form-control" placeholder="Välj ditt användarnamn." disabled />
+                    </div>
+                    <div class="mb-3">
+                        <label for="phoneNumber" class="form-label">Telefonnummer</label>
+                        <input id="phoneNumber" asp-for="Input.PhoneNumber" class="form-control" placeholder="Ange ditt telefonnummer." />
+                        <span asp-validation-for="Input.PhoneNumber" class="text-danger"></span>
+                    </div>
+                    <button id="update-profile-button" type="submit" class="btn-leave">Spara</button>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+
+@section Scripts {
+    <partial name="_ValidationScriptsPartial" />
+}

@@ -1,0 +1,51 @@
+﻿@page
+@model LoginModel
+@{
+    ViewData["Title"] = "Logga in";
+}
+
+<div class="container mt-5 col-md-4">
+    <div class="row justify-content-center">
+        <h2 class="text-center">@ViewData["Title"]</h2>
+        <hr />
+        <div class="col-md-8">
+            <div class="login-form">
+                
+                <form id="account" method="post" class="mt-5">
+                    <div asp-validation-summary="ModelOnly" class="text-danger" role="alert"></div>
+
+                    <div class="mb-3">
+                        <label for="email" class="form-label">E-post</label>
+                        <input id="email" asp-for="Input.Email" class="form-control" autocomplete="username" aria-required="true" placeholder="namn@example.com" />
+                        <span asp-validation-for="Input.Email" class="text-danger"></span>
+                    </div>
+
+                    <div class="mb-3">
+                        <label for="password" class="form-label">Lösenord</label>
+                        <input id="password" asp-for="Input.Password" class="form-control" autocomplete="current-password" aria-required="true" placeholder="lösenord" />
+                        <span asp-validation-for="Input.Password" class="text-danger"></span>
+                    </div>
+
+                    <div class="mb-3 form-check">
+                        <input class="form-check-input" asp-for="Input.RememberMe" />
+                        <label class="form-check-label" asp-for="Input.RememberMe">Kom ihåg mig?</label>
+                    </div>
+
+                    <button id="login-submit" type="submit" class="btn-leave mt-4">Logga in</button>
+
+                    <p class="forgot-password-link mt-5">
+                        <a class="text-decoration-none text-black-50" asp-page="./ForgotPassword">Glömt ditt lösenord?</a>
+                    </p>
+
+                    <p>
+                        <a class="text-decoration-none text-black-50"  id="resend-confirmation" asp-page="./ResendEmailConfirmation">Skicka e-postbekräftelse igen</a>
+                    </p>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+
+@section Scripts {
+    <partial name="_ValidationScriptsPartial" />
+}

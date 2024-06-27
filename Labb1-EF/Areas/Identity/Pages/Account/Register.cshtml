@@ -1,0 +1,76 @@
+﻿@page
+@model Labb1_EF.Areas.Identity.Pages.Account.RegisterModel
+
+@{
+    ViewData["Title"] = "Registrera";
+}
+
+<div class="container"> <h2>@ViewData["Title"] ny antälld</h2>
+    <div class="row justify-content-between align-content-end">
+        <div class="col-md-6 mt-lg-5">
+            <div class="login-form">
+                <h4>Användarinformation</h4>
+                <hr />
+                <form id="registerForm" method="post" >
+                    <div asp-validation-summary="ModelOnly" class="text-danger" role="alert"></div>
+
+                    <div class="form-floating mt-3">
+                        <input asp-for="Input.Email" class="form-control" autocomplete="username" aria-required="true" placeholder="namn@example.com" />
+                        <label asp-for="Input.Email">E-post</label>
+                        <span asp-validation-for="Input.Email" class="text-danger"></span>
+                    </div>
+
+                    <div class="form-floating mt-3">
+                        <input asp-for="Input.Password" class="form-control" autocomplete="new-password" aria-required="true" placeholder="lösenord" />
+                        <label asp-for="Input.Password">Lösenord</label>
+                        <span asp-validation-for="Input.Password" class="text-danger"></span>
+                    </div>
+
+                    <div class="form-floating mt-3">
+                        <input asp-for="Input.ConfirmPassword" class="form-control" autocomplete="new-password" aria-required="true" placeholder="bekräfta lösenord" />
+                        <label asp-for="Input.ConfirmPassword">Bekräfta lösenord</label>
+                        <span asp-validation-for="Input.ConfirmPassword" class="text-danger"></span>
+                    </div>
+
+                    <h4 class="mt-5">Person Information</h4>
+                    <hr />
+
+                    <div class="form-floating mt-3">
+                        <input asp-for="Input.FirstName" class="form-control" aria-required="true" placeholder="Förnamn" />
+                        <label asp-for="Input.FirstName">Förnamn</label>
+                        <span asp-validation-for="Input.FirstName" class="text-danger"></span>
+                    </div>
+
+                    <div class="form-floating mt-3">
+                        <input asp-for="Input.LastName" class="form-control" aria-required="true" placeholder="Efternamn" />
+                        <label asp-for="Input.LastName">Efternamn</label>
+                        <span asp-validation-for="Input.LastName" class="text-danger"></span>
+                    </div>
+
+                    <div class="form-floating mt-3">
+                        <input asp-for="Input.BirthDate" class="form-control" type="date" aria-required="true" placeholder="Födelsedatum" />
+                        <label asp-for="Input.BirthDate">Födelsedatum</label>
+                        <span asp-validation-for="Input.BirthDate" class="text-danger"></span>
+                    </div>
+
+                    <div class="form-floating mt-3">
+                        <select asp-for="Input.Role" asp-items="Model.Input.RoleList" class="form-control" aria-required="true">
+                            <option value="">Välj roll</option>
+                        </select>
+                        <label asp-for="Input.Role">Roll</label>
+                        <span asp-validation-for="Input.Role" class="text-danger"></span>
+                    </div>
+
+                    <button type="submit" class="btn-leave mt-5">Registrera</button>
+                </form>
+            </div>
+        </div>
+        <div class="col-md-6 mt-lg-5">
+            <img src="/img/new-employee-welcome-concept-vector.jpg" class="img-fluid" alt="Welcome Concept" />
+        </div>
+    </div>
+</div>
+
+@section Scripts {
+    <partial name="_ValidationScriptsPartial" />
+}
